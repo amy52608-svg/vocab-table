@@ -1,0 +1,389 @@
+:root {
+    /* Midnight Blue Theme */
+    --primary-bg: #0B132B;
+    --secondary-bg: #1C2541;
+    --tertiary-bg: #3A506B;
+    --accent-color: #5BC0BE;
+    --text-main: #FFFFFF;
+    --text-muted: #B0C4DE;
+    --border-color: #2F3E5A;
+    --row-hover: #263351;
+
+    /* Tag Colors */
+    --tag-year: #4A90E2;
+    --tag-diff-easy: #5BC0BE;
+    --tag-diff-med: #F4A261;
+    --tag-diff-hard: #E76F51;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+}
+
+/* Header & Controls */
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header-titles h1 {
+    font-size: 2rem;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+    letter-spacing: 1px;
+}
+
+.header-titles .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    align-items: center;
+    background-color: var(--secondary-bg);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.search-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-muted);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--tertiary-bg);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.search-box input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(91, 192, 190, 0.2);
+}
+
+.search-box input::placeholder {
+    color: #8A9BBB;
+}
+
+.filter-box {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.filter-box label {
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.filter-box select {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--tertiary-bg);
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    /* Custom arrow */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(91, 192, 190, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(91, 192, 190, 0.6);
+    background-color: #6CD2D0;
+}
+
+/* Table Area */
+.table-container {
+    flex: 1;
+    overflow: hidden;
+    /* Hide outer overflow */
+    background-color: var(--secondary-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+#vocabTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#vocabTable thead {
+    background-color: var(--tertiary-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#vocabTable th {
+    padding: 1rem 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--border-color);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* Col Widths */
+.col-word {
+    width: 15%;
+}
+
+.col-meaning {
+    width: 25%;
+}
+
+.col-sentence {
+    width: 40%;
+}
+
+.col-difficulty {
+    width: 10%;
+    text-align: center;
+}
+
+.col-year {
+    width: 10%;
+    text-align: center;
+}
+
+#vocabBody {
+    display: block;
+    /* For internal scroll */
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+#vocabTable thead,
+#vocabTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    /* Keep columns aligned */
+}
+
+#vocabTable td {
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+#vocabTable tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+#vocabTable tbody tr:hover {
+    background-color: var(--row-hover);
+}
+
+/* Cell Styles */
+.word-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+}
+
+.meaning-text {
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.sentence-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* Badges / Tags */
+.badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.year-badge {
+    background-color: rgba(74, 144, 226, 0.15);
+    color: var(--tag-year);
+    border: 1px solid rgba(74, 144, 226, 0.3);
+}
+
+.diff-badge {
+    /* Default */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #DDD;
+}
+
+.diff-badge.easy {
+    background-color: rgba(91, 192, 190, 0.15);
+    color: var(--tag-diff-easy);
+    border: 1px solid rgba(91, 192, 190, 0.3);
+}
+
+.diff-badge.med {
+    background-color: rgba(244, 162, 97, 0.15);
+    color: var(--tag-diff-med);
+    border: 1px solid rgba(244, 162, 97, 0.3);
+}
+
+.diff-badge.hard {
+    background-color: rgba(231, 111, 81, 0.15);
+    color: var(--tag-diff-hard);
+    border: 1px solid rgba(231, 111, 81, 0.3);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--tertiary-bg);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4A6384;
+}
+
+/* No Results State */
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 300px;
+    color: var(--text-muted);
+    gap: 1rem;
+}
+
+.no-results i {
+    font-size: 3rem;
+    color: var(--tertiary-bg);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .controls-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-box {
+        justify-content: space-between;
+    }
+
+    .col-word {
+        width: 20%;
+    }
+
+    .col-meaning {
+        width: 30%;
+    }
+
+    .col-sentence {
+        width: 50%;
+    }
+
+    .col-difficulty,
+    .col-year {
+        display: none;
+    }
+
+    /* Hide on smaller screens */
+    #vocabTable td:nth-child(4),
+    #vocabTable td:nth-child(5) {
+        display: none;
+    }
+}
