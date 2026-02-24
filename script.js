@@ -72,10 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const tr = document.createElement('tr');
 
             const word = item['單字'] || '';
-            const meaning = item['詞性與解釋'] || item['解釋'] || '';
-            // Example sentence key varies, find the one with '語境例句' or '例句'
-            const sentenceKey = Object.keys(item).find(k => k.includes('例句')) || '';
-            const sentence = sentenceKey ? item[sentenceKey] : '';
+            const meaning = item['詞性與解釋'] || '';
+            const sentence = item['例句'] || '';
             const difficulty = item['單字難度'] || '未標示';
             const year = item['來源年份'] || '';
 
@@ -110,9 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let searchMatch = true;
             if (query) {
                 const word = (item['單字'] || '').toLowerCase();
-                const meaning = (item['詞性與解釋'] || item['解釋'] || '').toLowerCase();
-                const sentenceKey = Object.keys(item).find(k => k.includes('例句')) || '';
-                const sentence = sentenceKey ? String(item[sentenceKey]).toLowerCase() : '';
+                const meaning = (item['詞性與解釋'] || '').toLowerCase();
+                const sentence = (item['例句'] || '').toLowerCase();
 
                 searchMatch = word.includes(query) || meaning.includes(query) || sentence.includes(query);
             }
@@ -134,16 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Prepare data for export (clean up keys if needed)
+        // Prepare data for export
         const exportData = filteredData.map(item => {
-            // Extract the actual example sentence dynamically
-            const sentenceKey = Object.keys(item).find(k => k.includes('例句')) || '例句';
             return {
                 '來源年份': item['來源年份'],
                 '單字難度': item['單字難度'],
                 '單字': item['單字'],
-                '詞性與解釋': item['詞性與解釋'] || item['解釋'],
-                '例句': item[sentenceKey]
+                '詞性與解釋': item['詞性與解釋'],
+                '例句': item['例句']
             };
         });
 
